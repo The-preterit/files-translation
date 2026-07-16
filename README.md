@@ -28,17 +28,30 @@ pip install -r requirements.txt
 
 ## Environment Variables
 
-To use the translation APIs, you must set the appropriate environment variable for authentication.
+The project supports `.env` files for managing credentials. Copy the example and fill in your keys:
 
-**For DeepL:**
 ```bash
-export DEEPL_AUTH_KEY="your_deepl_api_key_here"
+cp .env.example .env
 ```
 
-**For Google Cloud Translation:**
-```bash
-export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/service-account-file.json"
+Then edit `.env`:
+
+```dotenv
+# DeepL — https://www.deepl.com/pro-api
+DEEPL_AUTH_KEY=your_deepl_api_key_here
+
+# Google Cloud Translation
+# GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json
 ```
+
+The `.env` file is automatically loaded on startup. You can also point to a custom file using the `--env-file` argument:
+
+```bash
+python -m translator.main --project ./my-project --env-file /path/to/custom.env
+```
+
+> [!NOTE]
+> If the `.env` file is absent, the tool falls back to regular system environment variables, so both approaches are supported.
 
 ## Usage
 
